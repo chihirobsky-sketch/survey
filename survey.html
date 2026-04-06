@@ -38,30 +38,28 @@ body::before {
   box-shadow: 0 4px 32px rgba(65,193,174,0.12);
 }
 
-/* Header — centered, no icon */
 .header {
   background: linear-gradient(135deg, rgba(65,193,174,0.13) 0%, rgba(241,146,174,0.08) 100%);
   border-bottom: 2px solid #c8e8e4;
   padding: 36px 40px 28px;
-  text-align: center;
 }
 
 .header-title {
-  font-family: 'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', 'ヒラギノ明朝 Pro', serif;
+  font-family: 'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', serif;
   font-size: clamp(36px, 7vw, 54px);
   font-weight: 600;
   color: #2a9e8d;
   letter-spacing: 0.08em;
   line-height: 1.2;
   margin-bottom: 16px;
+  text-align: center;
 }
 
 .header-sub {
   font-size: 13px;
   color: #555;
   line-height: 2;
-  max-width: 500px;
-  margin: 0 auto;
+  text-align: left;
 }
 
 .privacy-bar {
@@ -71,8 +69,33 @@ body::before {
   font-size: 11.5px;
   color: #666;
   line-height: 1.7;
-  text-align: center;
+  text-align: left;
 }
+
+.example-link-bar {
+  background: rgba(241,146,174,0.07);
+  border-bottom: 1px solid #f0d8e4;
+  padding: 10px 40px;
+  font-size: 13px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.example-link-bar a {
+  display: inline-block;
+  color: #F192AE;
+  border: 1px solid #F192AE;
+  border-radius: 99px;
+  padding: 3px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.example-link-bar a:hover { background: #F192AE; color: white; }
 
 .section-div {
   background: linear-gradient(90deg, rgba(65,193,174,0.14) 0%, rgba(241,146,174,0.08) 100%);
@@ -115,6 +138,14 @@ body::before {
   flex: 1;
 }
 
+.q-desc {
+  font-size: 12px;
+  color: #777;
+  line-height: 1.8;
+  margin-bottom: 12px;
+  padding-left: 40px;
+}
+
 .req {
   display: inline-block;
   font-size: 10px;
@@ -138,14 +169,6 @@ body::before {
   vertical-align: middle;
 }
 
-.q-hint {
-  font-size: 12px;
-  color: #999;
-  margin-bottom: 10px;
-  line-height: 1.7;
-  padding-left: 40px;
-}
-
 .input-wrap { padding-left: 40px; }
 
 textarea, input[type=text] {
@@ -161,7 +184,7 @@ textarea, input[type=text] {
   transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
   line-height: 1.8;
 }
-textarea { resize: vertical; min-height: 100px; }
+textarea { resize: vertical; min-height: 120px; }
 textarea:focus, input[type=text]:focus {
   border-color: #41C1AE;
   box-shadow: 0 0 0 3px rgba(65,193,174,0.13);
@@ -202,15 +225,15 @@ textarea:focus, input[type=text]:focus {
   border-radius: 50%;
   border: 2px solid #ccc;
   flex-shrink: 0;
-  margin-top: 2px;
+  margin-top: 3px;
   display: flex; align-items: center; justify-content: center;
   transition: all 0.15s;
 }
 .radio-opt.selected .radio-circle { border-color: #41C1AE; background: #41C1AE; }
 .radio-dot { width: 6px; height: 6px; border-radius: 50%; background: white; display: none; }
 .radio-opt.selected .radio-dot { display: block; }
-.radio-text { font-size: 14px; color: #1a1a1a; line-height: 1.6; }
-.radio-sub { font-size: 12px; color: #999; margin-top: 2px; }
+.radio-text { font-size: 14px; color: #1a1a1a; line-height: 1.6; font-weight: 500; }
+.radio-sub { font-size: 12px; color: #777; margin-top: 4px; line-height: 1.7; }
 
 .submit-area {
   padding: 32px 40px;
@@ -278,9 +301,9 @@ textarea:focus, input[type=text]:focus {
 @media (max-width: 600px) {
   body { padding: 16px 12px 60px; }
   .header { padding: 28px 20px 22px; }
-  .privacy-bar, .section-div { padding-left: 20px; padding-right: 20px; }
+  .privacy-bar, .section-div, .example-link-bar { padding-left: 20px; padding-right: 20px; }
   .q-block { padding: 18px 20px; }
-  .q-hint, .input-wrap, .radio-group { padding-left: 0; }
+  .q-desc, .input-wrap, .radio-group { padding-left: 0; }
   .submit-area { padding: 24px 20px; }
   .success-page { padding: 60px 20px; }
 }
@@ -304,6 +327,11 @@ textarea:focus, input[type=text]:focus {
     いただいた回答および個人情報につきましては、当方のプライバシーポリシーに従い、厳重に保管いたします。ご多忙と存じますが、なにとぞご協力のほど、よろしくお願い申し上げます。
   </div>
 
+  <div class="example-link-bar">
+    どのくらい書けばいいか迷ったら…
+    <a href="example.html" target="_blank">記入例を見る →</a>
+  </div>
+
   <div class="section-div">基本情報</div>
 
   <div class="q-block">
@@ -312,7 +340,7 @@ textarea:focus, input[type=text]:focus {
       <div class="q-label">お名前<span class="req">必須</span></div>
     </div>
     <div class="input-wrap">
-      <input type="text" id="qname" placeholder="例：A.T.さん　／　30代女性　など">
+      <input type="text" id="qname" placeholder="例：山田花子">
     </div>
   </div>
 
@@ -321,12 +349,11 @@ textarea:focus, input[type=text]:focus {
   <div class="q-block">
     <div class="q-row">
       <div class="q-num">Q2</div>
-      <div class="q-label">このカウンセリングを受けようと思われた動機は何でしょうか。<span class="req">必須</span></div>
+      <div class="q-label">『脱毒親プログラム【Dトレ】』を受けようと思われたきっかけは何でしょうか。<span class="req">必須</span></div>
     </div>
-    <div class="q-hint">理由を詳しくお聞かせください。</div>
     <div class="input-wrap">
-      <textarea id="q1" rows="5" placeholder="例：親との関係に長年悩んでいて、自分の力だけでは変われないと感じていたため…" oninput="cnt(this,'c1',500)"></textarea>
-      <div class="char-count"><span id="c1">0</span> / 500</div>
+      <textarea id="q1" rows="6" oninput="cnt(this,'c1',1000)"></textarea>
+      <div class="char-count"><span id="c1">0</span> / 1000</div>
     </div>
   </div>
 
@@ -336,8 +363,8 @@ textarea:focus, input[type=text]:focus {
       <div class="q-label">相談前にどのようなことでお悩みでしたか？<span class="req">必須</span></div>
     </div>
     <div class="input-wrap">
-      <textarea id="q2" rows="5" placeholder="受講前の状況や、抱えていたお悩みをお聞かせください…" oninput="cnt(this,'c2',500)"></textarea>
-      <div class="char-count"><span id="c2">0</span> / 500</div>
+      <textarea id="q2" rows="6" oninput="cnt(this,'c2',1000)"></textarea>
+      <div class="char-count"><span id="c2">0</span> / 1000</div>
     </div>
   </div>
 
@@ -346,23 +373,22 @@ textarea:focus, input[type=text]:focus {
   <div class="q-block">
     <div class="q-row">
       <div class="q-num">Q4</div>
-      <div class="q-label">セッションを受けて、変わったこと・気づいたこと・驚いたこと・役立ったことはございますか？<span class="req">必須</span></div>
+      <div class="q-label">カウンセリングを受けて、何か「変わったこと」「気づいたこと」「驚いたこと」「役立ったこと」はございますか。どんな些細なことでも良いので、お聞かせください。<span class="req">必須</span></div>
     </div>
-    <div class="q-hint">どんな些細なことでも良いので、お聞かせください。</div>
     <div class="input-wrap">
-      <textarea id="q3" rows="6" placeholder="例：以前は親の言動に振り回されていたが、自分の感情を切り離して考えられるようになった…" oninput="cnt(this,'c3',600)"></textarea>
-      <div class="char-count"><span id="c3">0</span> / 600</div>
+      <textarea id="q3" rows="7" oninput="cnt(this,'c3',1500)"></textarea>
+      <div class="char-count"><span id="c3">0</span> / 1500</div>
     </div>
   </div>
 
   <div class="q-block">
     <div class="q-row">
       <div class="q-num">Q5</div>
-      <div class="q-label">カウンセラーはどんな人で、どんな雰囲気でセッションが進みましたか？<span class="opt">任意</span></div>
+      <div class="q-label">カウンセラーはどんな人で、どんな雰囲気でカウンセリングが進みましたか？<span class="opt">任意</span></div>
     </div>
     <div class="input-wrap">
-      <textarea id="q4" rows="4" placeholder="例：とても話しやすく、否定せずに聞いてくださった…" oninput="cnt(this,'c4',400)"></textarea>
-      <div class="char-count"><span id="c4">0</span> / 400</div>
+      <textarea id="q4" rows="5" oninput="cnt(this,'c4',1000)"></textarea>
+      <div class="char-count"><span id="c4">0</span> / 1000</div>
     </div>
   </div>
 
@@ -372,44 +398,52 @@ textarea:focus, input[type=text]:focus {
       <div class="q-label">他のカウンセリングやサービスと最も違う点をお聞かせください。<span class="opt">任意</span></div>
     </div>
     <div class="input-wrap">
-      <textarea id="q5" rows="4" placeholder="例：他では「親を許しましょう」と言われたが、ここでは自分の気持ちを優先してもらえた…" oninput="cnt(this,'c5',400)"></textarea>
-      <div class="char-count"><span id="c5">0</span> / 400</div>
+      <textarea id="q5" rows="5" oninput="cnt(this,'c5',1000)"></textarea>
+      <div class="char-count"><span id="c5">0</span> / 1000</div>
     </div>
   </div>
 
   <div class="q-block">
     <div class="q-row">
       <div class="q-num">Q7</div>
-      <div class="q-label">このカウンセリングを、どんな人にオススメだと思いますか？<span class="opt">任意</span></div>
+      <div class="q-label">このプログラムは、どんな人におススメだと思いますか？<span class="opt">任意</span></div>
     </div>
     <div class="input-wrap">
-      <textarea id="q6" rows="4" placeholder="例：親との関係に苦しんでいて、自分を責めてしまいがちな方に…" oninput="cnt(this,'c6',400)"></textarea>
-      <div class="char-count"><span id="c6">0</span> / 400</div>
+      <textarea id="q6" rows="4" oninput="cnt(this,'c6',1000)"></textarea>
+      <div class="char-count"><span id="c6">0</span> / 1000</div>
     </div>
   </div>
 
-  <div class="section-div">掲載について</div>
+  <div class="section-div">回答の活用について</div>
 
   <div class="q-block">
     <div class="q-row">
       <div class="q-num">Q8</div>
-      <div class="q-label">いただいた回答を、サービス紹介等に掲載してもよいでしょうか？<span class="req">必須</span></div>
+      <div class="q-label">いただいた回答の活用範囲についてお聞かせください。<span class="req">必須</span></div>
+    </div>
+    <div class="q-desc">
+      事例検討会・研究会などで発表する際は、個人を特定できる情報を削除または修正した上で使用いたします。ご希望の範囲をお選びください。
     </div>
     <div class="radio-group" id="rg7">
       <div class="radio-opt" onclick="sel(this,'YES')">
         <div class="radio-circle"><div class="radio-dot"></div></div>
-        <div><div class="radio-text">YES — 掲載してOKです</div></div>
+        <div>
+          <div class="radio-text">YES — すべての用途での使用を承諾します</div>
+          <div class="radio-sub">他の方の参考になるなら、ぜひ役立ててください。（事例検討・サービス紹介・事例掲載、すべてOK）</div>
+        </div>
       </div>
-      <div class="radio-opt" onclick="sel(this,'条件付きOK')">
+      <div class="radio-opt" onclick="sel(this,'事例検討のみOK')">
         <div class="radio-circle"><div class="radio-dot"></div></div>
         <div>
-          <div class="radio-text">条件付きでOK</div>
-          <div class="radio-sub">（例：イニシャルのみ、など）</div>
+          <div class="radio-text">事例検討・研究会など専門家間での使用のみ承諾します</div>
+          <div class="radio-sub">サービス紹介などでの使用は承諾しません。</div>
         </div>
       </div>
       <div class="radio-opt" onclick="sel(this,'NO')">
         <div class="radio-circle"><div class="radio-dot"></div></div>
-        <div><div class="radio-text">NO — 掲載しないでください</div></div>
+        <div>
+          <div class="radio-text">NO — いかなる場面でも使用しないでください</div>
+        </div>
       </div>
     </div>
   </div>
@@ -417,7 +451,7 @@ textarea:focus, input[type=text]:focus {
   <div class="q-block hidden" id="cond-block">
     <div class="q-row">
       <div class="q-num">↳</div>
-      <div class="q-label">掲載条件・ご要望をお書きください<span class="req">必須</span></div>
+      <div class="q-label">その他ご要望があればお書きください</div>
     </div>
     <div class="input-wrap">
       <input type="text" id="q7cond" placeholder="例：イニシャルのみ（A.T.）でお願いします">
@@ -457,7 +491,7 @@ function sel(el, val) {
   document.getElementById('rg7').querySelectorAll('.radio-opt').forEach(o => o.classList.remove('selected'));
   el.classList.add('selected');
   pubVal = val;
-  document.getElementById('cond-block').classList.toggle('hidden', val !== '条件付きOK');
+  document.getElementById('cond-block').classList.toggle('hidden', val !== 'YES');
 }
 
 function submitForm() {
@@ -467,10 +501,7 @@ function submitForm() {
   const q3 = document.getElementById('q3').value.trim();
   if (!name) { alert('お名前は必須項目です。ご記入をお願いします。'); return; }
   if (!q1 || !q2 || !q3) { alert('Q2〜Q4は必須項目です。ご記入をお願いします。'); return; }
-  if (!pubVal) { alert('Q8（掲載可否）をお選びください。'); return; }
-  if (pubVal === '条件付きOK' && !document.getElementById('q7cond').value.trim()) {
-    alert('掲載条件をご記入ください。'); return;
-  }
+  if (!pubVal) { alert('Q8（回答の活用範囲）をお選びください。'); return; }
 
   document.getElementById('submitBtn').disabled = true;
   document.getElementById('sending').style.display = 'block';
