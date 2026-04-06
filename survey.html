@@ -45,9 +45,9 @@ body::before {
 }
 
 .header-title {
-  font-family: 'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', serif;
+  font-family: 'ヒラギノ明朝 ProN W9', 'Hiragino Mincho ProN', serif;
   font-size: clamp(36px, 7vw, 54px);
-  font-weight: 600;
+  font-weight: 900;
   color: #2a9e8d;
   letter-spacing: 0.08em;
   line-height: 1.2;
@@ -73,29 +73,40 @@ body::before {
 }
 
 .example-link-bar {
-  background: rgba(241,146,174,0.07);
-  border-bottom: 1px solid #f0d8e4;
-  padding: 10px 40px;
-  font-size: 13px;
-  color: #555;
+  background: rgba(241,146,174,0.10);
+  border-bottom: 2px solid #f0d8e4;
+  padding: 16px 40px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.example-link-bar-text {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.6;
 }
 
 .example-link-bar a {
   display: inline-block;
-  color: #F192AE;
-  border: 1px solid #F192AE;
-  border-radius: 99px;
-  padding: 3px 14px;
-  font-size: 12px;
+  background: #F192AE;
+  color: white;
+  border-radius: 4px;
+  padding: 10px 24px;
+  font-size: 14px;
   font-weight: 500;
   text-decoration: none;
-  transition: all 0.15s;
+  transition: all 0.2s;
   white-space: nowrap;
+  box-shadow: 0 3px 12px rgba(241,146,174,0.35);
+  letter-spacing: 0.05em;
 }
-.example-link-bar a:hover { background: #F192AE; color: white; }
+.example-link-bar a:hover {
+  background: #d4708f;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 16px rgba(241,146,174,0.45);
+}
 
 .section-div {
   background: linear-gradient(90deg, rgba(65,193,174,0.14) 0%, rgba(241,146,174,0.08) 100%);
@@ -152,17 +163,6 @@ body::before {
   font-weight: 500;
   color: #F192AE;
   border: 1px solid #F192AE;
-  border-radius: 99px;
-  padding: 1px 8px;
-  margin-left: 8px;
-  vertical-align: middle;
-}
-
-.opt {
-  display: inline-block;
-  font-size: 10px;
-  color: #aaa;
-  border: 1px solid #ddd;
   border-radius: 99px;
   padding: 1px 8px;
   margin-left: 8px;
@@ -289,8 +289,8 @@ textarea:focus, input[type=text]:focus {
 }
 
 .success-title {
-  font-family: 'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', serif;
-  font-size: 28px; font-weight: 600;
+  font-family: 'ヒラギノ明朝 ProN W9', 'Hiragino Mincho ProN', serif;
+  font-size: 28px; font-weight: 900;
   color: #2a9e8d;
   margin-bottom: 16px;
   letter-spacing: 0.06em;
@@ -301,7 +301,8 @@ textarea:focus, input[type=text]:focus {
 @media (max-width: 600px) {
   body { padding: 16px 12px 60px; }
   .header { padding: 28px 20px 22px; }
-  .privacy-bar, .section-div, .example-link-bar { padding-left: 20px; padding-right: 20px; }
+  .privacy-bar, .section-div { padding-left: 20px; padding-right: 20px; }
+  .example-link-bar { padding: 14px 20px; flex-direction: column; align-items: flex-start; gap: 10px; }
   .q-block { padding: 18px 20px; }
   .q-desc, .input-wrap, .radio-group { padding-left: 0; }
   .submit-area { padding: 24px 20px; }
@@ -328,7 +329,7 @@ textarea:focus, input[type=text]:focus {
   </div>
 
   <div class="example-link-bar">
-    どのくらい書けばいいか迷ったら…
+    <div class="example-link-bar-text">どのくらい書けばいいか迷ったら、<br>記入例をご参考ください。</div>
     <a href="example.html" target="_blank">記入例を見る →</a>
   </div>
 
@@ -384,7 +385,7 @@ textarea:focus, input[type=text]:focus {
   <div class="q-block">
     <div class="q-row">
       <div class="q-num">Q5</div>
-      <div class="q-label">カウンセラーはどんな人で、どんな雰囲気でカウンセリングが進みましたか？<span class="opt">任意</span></div>
+      <div class="q-label">カウンセラーはどんな人で、どんな雰囲気でカウンセリングが進みましたか？<span class="req">必須</span></div>
     </div>
     <div class="input-wrap">
       <textarea id="q4" rows="5" oninput="cnt(this,'c4',1000)"></textarea>
@@ -395,7 +396,7 @@ textarea:focus, input[type=text]:focus {
   <div class="q-block">
     <div class="q-row">
       <div class="q-num">Q6</div>
-      <div class="q-label">他のカウンセリングやサービスと最も違う点をお聞かせください。<span class="opt">任意</span></div>
+      <div class="q-label">他のカウンセリングやサービスと最も違う点をお聞かせください。<span class="req">必須</span></div>
     </div>
     <div class="input-wrap">
       <textarea id="q5" rows="5" oninput="cnt(this,'c5',1000)"></textarea>
@@ -406,7 +407,7 @@ textarea:focus, input[type=text]:focus {
   <div class="q-block">
     <div class="q-row">
       <div class="q-num">Q7</div>
-      <div class="q-label">このプログラムは、どんな人におススメだと思いますか？<span class="opt">任意</span></div>
+      <div class="q-label">このプログラムは、どんな人におススメだと思いますか？<span class="req">必須</span></div>
     </div>
     <div class="input-wrap">
       <textarea id="q6" rows="4" oninput="cnt(this,'c6',1000)"></textarea>
@@ -448,16 +449,6 @@ textarea:focus, input[type=text]:focus {
     </div>
   </div>
 
-  <div class="q-block hidden" id="cond-block">
-    <div class="q-row">
-      <div class="q-num">↳</div>
-      <div class="q-label">その他ご要望があればお書きください</div>
-    </div>
-    <div class="input-wrap">
-      <input type="text" id="q7cond" placeholder="例：イニシャルのみ（A.T.）でお願いします">
-    </div>
-  </div>
-
   <div class="submit-area">
     <button class="btn-submit" id="submitBtn" onclick="submitForm()">アンケートを送信する</button>
     <div class="sending-msg" id="sending">送信中です。しばらくお待ちください…</div>
@@ -491,7 +482,6 @@ function sel(el, val) {
   document.getElementById('rg7').querySelectorAll('.radio-opt').forEach(o => o.classList.remove('selected'));
   el.classList.add('selected');
   pubVal = val;
-  document.getElementById('cond-block').classList.toggle('hidden', val !== 'YES');
 }
 
 function submitForm() {
@@ -499,20 +489,24 @@ function submitForm() {
   const q1 = document.getElementById('q1').value.trim();
   const q2 = document.getElementById('q2').value.trim();
   const q3 = document.getElementById('q3').value.trim();
-  if (!name) { alert('お名前は必須項目です。ご記入をお願いします。'); return; }
-  if (!q1 || !q2 || !q3) { alert('Q2〜Q4は必須項目です。ご記入をお願いします。'); return; }
-  if (!pubVal) { alert('Q8（回答の活用範囲）をお選びください。'); return; }
+  const q4 = document.getElementById('q4').value.trim();
+  const q5 = document.getElementById('q5').value.trim();
+  const q6 = document.getElementById('q6').value.trim();
+  if (!name) { alert('Q1 お名前は必須項目です。'); return; }
+  if (!q1) { alert('Q2 受講のきっかけは必須項目です。'); return; }
+  if (!q2) { alert('Q3 相談前のお悩みは必須項目です。'); return; }
+  if (!q3) { alert('Q4 受講後の変化は必須項目です。'); return; }
+  if (!q4) { alert('Q5 カウンセラーについては必須項目です。'); return; }
+  if (!q5) { alert('Q6 他との違いは必須項目です。'); return; }
+  if (!q6) { alert('Q7 おススメな人は必須項目です。'); return; }
+  if (!pubVal) { alert('Q8 回答の活用範囲をお選びください。'); return; }
 
   document.getElementById('submitBtn').disabled = true;
   document.getElementById('sending').style.display = 'block';
 
   const params = new URLSearchParams({
-    name, q1, q2, q3,
-    q4: document.getElementById('q4').value.trim(),
-    q5: document.getElementById('q5').value.trim(),
-    q6: document.getElementById('q6').value.trim(),
-    q7: pubVal,
-    q7cond: document.getElementById('q7cond').value.trim()
+    name, q1, q2, q3, q4, q5, q6,
+    q7: pubVal
   });
 
   const img = new Image();

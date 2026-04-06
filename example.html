@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>記入例 | 受講後アンケート</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', sans-serif;
+  min-height: 100vh;
+  background: url('background.png') center center / cover fixed;
+  padding: 40px 16px 80px;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.28);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.paper {
+  background: rgba(255,255,255,0.90);
+  border: 2px solid #c8e8e4;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 32px rgba(65,193,174,0.12);
+}
+
+.header {
+  background: linear-gradient(135deg, rgba(65,193,174,0.13) 0%, rgba(241,146,174,0.08) 100%);
+  border-bottom: 2px solid #c8e8e4;
+  padding: 28px 40px;
+}
+
+.header-title {
+  font-family: 'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #2a9e8d;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+
+.header-sub {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.9;
+  text-align: left;
+}
+
+.example-block {
+  border-bottom: 2px solid #d4eeeb;
+  padding: 32px 40px;
+}
+.example-block:last-of-type { border-bottom: none; }
+
+.example-num {
+  display: inline-block;
+  background: linear-gradient(135deg, #41C1AE, #F192AE);
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 16px;
+  border-radius: 99px;
+  letter-spacing: 0.08em;
+  margin-bottom: 24px;
+}
+
+.q-item {
+  margin-bottom: 24px;
+}
+.q-item:last-child { margin-bottom: 0; }
+
+.q-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.7;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1.5px solid #c8e8e4;
+}
+
+.q-label-num {
+  color: #41C1AE;
+  margin-right: 4px;
+}
+
+.q-answer {
+  font-size: 14px;
+  color: #333;
+  line-height: 2;
+  white-space: pre-wrap;
+  padding-left: 4px;
+}
+
+.back-btn {
+  display: block;
+  text-align: center;
+  padding: 28px;
+  background: linear-gradient(135deg, rgba(65,193,174,0.07) 0%, rgba(241,146,174,0.04) 100%);
+  border-top: 2px solid #c8e8e4;
+}
+
+.back-btn a {
+  display: inline-block;
+  padding: 12px 40px;
+  background: #41C1AE;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(65,193,174,0.30);
+}
+.back-btn a:hover { background: #2eaa97; transform: translateY(-1px); }
+
+@media (max-width: 600px) {
+  .header { padding: 24px 20px; }
+  .example-block { padding: 24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+<div class="paper">
+
+  <div class="header">
+    <div class="header-title">記入例</div>
+    <div class="header-sub">
+      こちらの記入例は実際卒業された方からいただいたものを、個人情報をぼかした上で載せています。こちらをご参考にしながら、ご自分の思いをお書きください。
+    </div>
+  </div>
+
+  <!-- 例1 -->
+  <div class="example-block">
+    <div class="example-num">例 1</div>
+
+    <div class="q-item">
+      <div class="q-label"><span class="q-label-num">Q2.</span>『脱毒親プログラム【Dトレ】』を受けようと思われたきっかけは何でしょうか。</div>
+      <div class="q-answer">逃げるようにして絶縁した母親から、相続問題で連絡が入り、どうしても会わなければならない状況に追い込まれました。母親と絶縁して２年間ようやく安定してきたのに、母親の顔を思い出しただけで、当時の嫌な感情が込み上げてきて、恐怖に襲われ、どうにかしなければと焦り、あらゆるSNSを検索しました。
+
+そんな中YouTubeのおすすめに上がってきたのが、大空さんのYouTube動画でした。
+
+ネット上ではいろんな人がいろんなことを言っていて、どれを信じたらいいかわからないと、疲れ切っていたのですが、大空さんの動画には「なるほどそうか」と今の自分の状態がわかる内容がすごく多かったので、夢中になってほとんどの動画を見ました。
+
+ホームページも全部見たら、隅の方に「体験カウンセリング」を申し込むページを見つけたので、「受けてみたい」と思って、早速申し込みました。</div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-label"><span class="q-label-num">Q3.</span>相談前にどのようなことでお悩みでしたか？</div>
+      <div class="q-answer">私は母親の前に出ると萎縮して何も言えなくなってしまいます。自分では「これ以上言うことを聞きたくない」と思っているのに、気がつくといつの間にか母親の思い通りになっているんです。
+
+あと、年上の女性の前でも同じような状態になることが多くて、思い返してみると、お局様と影で呼ばれる人には必ずと言っていいほどターゲットにされて、利用されたり、いじめられたりしてきました。
+
+関わりたくない人なのに、萎縮してしまって、ついその人の前でいい顔をしてしまって、いいようにされてしまう。そんな自分をどうやって変えていいのかわからなくて、ずっと悩んでいました。
+
+今回の相続問題で、これ以上母親のいいようにされたくないと、強く思ったけど、どうしたらいいかわかりませんでした。</div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-label"><span class="q-label-num">Q4.</span>カウンセリングを受けて、何か「変わったこと」「気づいたこと」「驚いたこと」「役立ったこと」はございますか。どんな些細なことでも良いので、お聞かせください。</div>
+      <div class="q-answer">一番びっくりしたのは、私は、心の底では、今でも母親が好きで、いつか笑い合える親子関係を築けると期待していたということに気づいたことでした。
+
+心理セラピーを受けて、初めてこれに気づいた時、この気持ちをずっと認めたくなかったんだと、腑に落ちました。
+
+これに気づいたら、母親に会う勇気が出てきたので、自分から連絡を取って会いにいきました。
+
+会う前に、大空さんと会話の練習をしたり、いろんなパターンの対策も考えていったのですが、実際にあったら全く恐怖がなかったのでびっくりしました。実際に話してみて、「この人、人として嫌いだな」と心から納得したから、余計そう思ったのだと思います。
+
+そして、最近気づいたのですが、不思議なことに、私最近年上の女性と普通に話していました。
+
+嫌な人だと思ったら、それを素直に感じることができて、距離を置くようになったんです。そしたら、相手の態度がいつの間にか、穏やかになっていました。これは本当に不思議です。</div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-label"><span class="q-label-num">Q5.</span>カウンセラーはどんな人で、どんな雰囲気でカウンセリングが進みましたか？</div>
+      <div class="q-answer">初めてお会いした時の第一印象は「動画と同じだ」ということです。なんか、動画の中にいる人と話をしているのが、面白かったです。
+
+カウンセリング中はしっかりお話を聞いてくださって、本当に話しやすかったです。
+
+自分では思いつかない視点や、自分でも気づかない自分の気持ちを表現してくれるので、戸惑うこともありましたが、そういう時は無理に進めず、立ち止まって考える時間をくれるので、安心できました。</div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-label"><span class="q-label-num">Q6.</span>他のカウンセリングやサービスと最も違う点をお聞かせください。</div>
+      <div class="q-answer">実は、20代前半の頃から、何度もいろんなカウンセリングを受けてきたんです。インナーチャイルドも、認知行動療法も、スピリチュアルなものもいろいろ経験しました。
+
+どれも、気持ちを言うまではできるのですが、そのあと「じゃあどうするの？」と思ったところで終わりなんです。あなたの問題は、自己肯定感の低さです。だから、「自己肯定感をあげましょう」「自分を認めましょう」と言われても、「できないものはできない」で終わっていました。
+
+でも、このプログラムは、そこがすごく具体的でした。目から鱗の考え方や、勇気を出したら実はその方が楽だったみたいな体験がすごく多くて、後半は楽しかったです。</div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-label"><span class="q-label-num">Q7.</span>このプログラムは、どんな人におススメだと思いますか？</div>
+      <div class="q-answer">親子関係の問題に悩んでいる方はもちろんですが、人間関係全般悩んでいる方におすすめできます。</div>
+    </div>
+  </div>
+
+  <!-- 例2 -->
+  <div class="example-block">
+    <div class="example-num">例 2</div>
+
+    <div class="q-item">
+      <div class="q-label"><span class="q-label-num">Q2.</span>『脱毒親プログラム【Dトレ】』を受けようと思われたきっかけは何でしょうか。</div>
+      <div class="q-answer">お付き合いしている人との関係が苦しくて、YouTubeでいろいろと見ていたところ、大空さんの動画がおススメに上がってきたので、見始めたのがきっかけです。</div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-label"><span class="q-label-num">Q3.</span>相談前にどのようなことでお悩みでしたか？</div>
+      <div class="q-answer">私は多分ダメンズウォーカー（古くてすみません）だという自覚があるのですが、ダメンズじゃない人には魅力を感じなくて、困っていました。</div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-label"><span class="q-label-num">Q4.</span>カウンセリングを受けて、何か「変わったこと」「気づいたこと」「驚いたこと」「役立ったこと」はございますか。どんな些細なことでも良いので、お聞かせください。</div>
+      <div class="q-answer">ダメンズに惹かれるのは、未完了のトラウマ体験だったということです。これは衝撃でした。
+
+セラピー後は、ダメンズに全く魅力を感じません。そして、恋愛なのに母親との関係が影響しているのも驚きでした。ずっと父親との問題だと思っていたので、自分だけではここまで気づけませんでした。</div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-label"><span class="q-label-num">Q5.</span>カウンセラーはどんな人で、どんな雰囲気でカウンセリングが進みましたか？</div>
+      <div class="q-answer">きさくで話しやすい雰囲気でした。たまに厳しいことも言われますが、全部納得できたし、真剣に向き合ってもらえる感じがしてなぜか心地よかったです。</div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-label"><span class="q-label-num">Q6.</span>他のカウンセリングやサービスと最も違う点をお聞かせください。</div>
+      <div class="q-answer">言いたいことが湧き上がったり、不安になったときに、いつでもチャットできる仕組みがあるのは本当に良かったです。カウンセリングで、なんであんなこと言っちゃったんだろーって思ったときに、チャットで伝えたら、新たに重要なヒントをもらえたりして、タイムリーっていいなと思いました。
+
+動画のワークも見てくれる人がいると思うと真剣に取り組んだし、自分で進んでいる感覚があって良かったです。</div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-label"><span class="q-label-num">Q7.</span>このプログラムは、どんな人におススメだと思いますか？</div>
+      <div class="q-answer">妹も私もプログラム中に今までにない良い出会いがあって、びっくりしました。
+
+なので、恋愛問題に悩んでいる人には、ぜひおすすめしたいです。</div>
+    </div>
+  </div>
+
+  <div class="back-btn">
+    <a href="survey.html">← アンケートに戻る</a>
+  </div>
+
+</div>
+</div>
+
+</body>
+</html>
