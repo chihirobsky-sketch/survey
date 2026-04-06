@@ -470,7 +470,7 @@ textarea:focus, input[type=text]:focus {
 </div>
 
 <script>
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbwpo3oMg-g-bB9fCaQaYfK8Ca5mc0WfpbweoeYVoRXe-WV0tZVP79ShGKaOhm2xFoqs/exec';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbyD7s5Yoh1wZADYaToTdJhOGPf26Ati6rEKgsZIq6RGkC_hsGROM_jLLcGMuYpufItu/exec';
 let pubVal = '';
 
 function cnt(el, id, max) {
@@ -504,8 +504,10 @@ function submitForm() {
   document.getElementById('submitBtn').disabled = true;
   document.getElementById('sending').style.display = 'block';
 
+  // 名前を最初に送信
   const params = new URLSearchParams({
-    name, q1, q2, q3, q4, q5, q6,
+    name,
+    q1, q2, q3, q4, q5, q6,
     q7: pubVal
   });
 
