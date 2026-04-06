@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>回答一覧 | Dトレ終了後アンケート</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', sans-serif;
+  min-height: 100vh;
+  background: url('background.png') center center / cover fixed;
+  padding: 40px 16px 80px;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.28);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.paper {
+  background: rgba(255,255,255,0.92);
+  border: 2px solid #c8e8e4;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 32px rgba(65,193,174,0.12);
+}
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, rgba(65,193,174,0.13) 0%, rgba(241,146,174,0.08) 100%);
+  border-bottom: 2px solid #c8e8e4;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.header-title {
+  font-family: 'ヒラギノ明朝 ProN W9', 'Hiragino Mincho ProN', serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: #2a9e8d;
+  letter-spacing: 0.06em;
+}
+
+.sort-btns {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.sort-btn {
+  padding: 6px 14px;
+  font-size: 12px;
+  font-family: 'ヒラギノ角ゴ ProN', sans-serif;
+  border: 1px solid #b8e0da;
+  border-radius: 99px;
+  background: white;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.sort-btn:hover { border-color: #41C1AE; color: #2a9e8d; }
+.sort-btn.active { background: #41C1AE; border-color: #41C1AE; color: white; }
+
+/* List view */
+#list-view { display: block; }
+#detail-view { display: none; }
+
+.loading {
+  padding: 48px;
+  text-align: center;
+  font-size: 14px;
+  color: #999;
+}
+
+.list-count {
+  padding: 10px 32px;
+  font-size: 12px;
+  color: #999;
+  border-bottom: 1px solid #e8f0ef;
+  background: rgba(65,193,174,0.03);
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 32px;
+  border-bottom: 1px solid #e8f0ef;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.list-item:last-child { border-bottom: none; }
+.list-item:hover { background: rgba(65,193,174,0.06); }
+
+.list-num {
+  font-size: 12px;
+  color: #bbb;
+  min-width: 28px;
+  flex-shrink: 0;
+}
+
+.list-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a1a1a;
+  flex: 1;
+}
+
+.list-date {
+  font-size: 12px;
+  color: #999;
+  flex-shrink: 0;
+}
+
+.list-arrow {
+  font-size: 14px;
+  color: #ccc;
+  flex-shrink: 0;
+}
+
+/* Detail view */
+.detail-header {
+  background: linear-gradient(135deg, rgba(65,193,174,0.10) 0%, rgba(241,146,174,0.07) 100%);
+  border-bottom: 2px solid #c8e8e4;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.back-btn {
+  padding: 7px 16px;
+  font-size: 13px;
+  font-family: 'ヒラギノ角ゴ ProN', sans-serif;
+  border: 1px solid #b8e0da;
+  border-radius: 99px;
+  background: white;
+  color: #2a9e8d;
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+.back-btn:hover { background: #41C1AE; color: white; border-color: #41C1AE; }
+
+.detail-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  flex: 1;
+}
+
+.detail-date {
+  font-size: 12px;
+  color: #999;
+  flex-shrink: 0;
+}
+
+.section-div {
+  background: linear-gradient(90deg, rgba(65,193,174,0.14) 0%, rgba(241,146,174,0.08) 100%);
+  border-top: 1px solid #d4eeeb;
+  border-bottom: 1px solid #d4eeeb;
+  padding: 7px 32px;
+  font-family: 'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #2a9e8d;
+  letter-spacing: 0.14em;
+}
+
+.q-block {
+  padding: 20px 32px;
+  border-bottom: 1px solid #e8f0ef;
+}
+.q-block:last-child { border-bottom: none; }
+
+.q-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.q-num {
+  font-size: 12px;
+  font-weight: 600;
+  color: #41C1AE;
+  flex-shrink: 0;
+  min-width: 28px;
+  padding-top: 1px;
+}
+
+.q-label {
+  font-size: 12px;
+  color: #888;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.q-answer {
+  font-size: 14px;
+  color: #1a1a1a;
+  line-height: 2;
+  white-space: pre-wrap;
+  padding-left: 38px;
+}
+
+.q-answer.empty {
+  color: #ccc;
+  font-style: italic;
+}
+
+.usage-badge {
+  display: inline-block;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  margin-top: 4px;
+  margin-left: 38px;
+}
+.usage-yes { background: rgba(65,193,174,0.12); color: #2a9e8d; }
+.usage-partial { background: rgba(241,146,174,0.12); color: #c0507a; }
+.usage-no { background: rgba(150,150,150,0.10); color: #888; }
+
+@media (max-width: 600px) {
+  .header { padding: 18px 20px; flex-direction: column; align-items: flex-start; }
+  .list-item { padding: 14px 20px; }
+  .detail-header { padding: 14px 20px; }
+  .section-div { padding: 7px 20px; }
+  .q-block { padding: 16px 20px; }
+  .q-answer { padding-left: 0; }
+  .usage-badge { margin-left: 0; }
+  .list-count { padding: 10px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+<div class="paper">
+
+  <!-- 一覧ビュー -->
+  <div id="list-view">
+    <div class="header">
+      <div class="header-title">回答一覧</div>
+      <div class="sort-btns">
+        <button class="sort-btn active" id="btn-desc" onclick="setSort('desc')">新しい順</button>
+        <button class="sort-btn" id="btn-asc" onclick="setSort('asc')">古い順</button>
+      </div>
+    </div>
+    <div id="list-body">
+      <div class="loading">読み込み中...</div>
+    </div>
+  </div>
+
+  <!-- 詳細ビュー -->
+  <div id="detail-view">
+    <div class="detail-header">
+      <button class="back-btn" onclick="showList()">← 一覧に戻る</button>
+      <div class="detail-name" id="d-name"></div>
+      <div class="detail-date" id="d-date"></div>
+    </div>
+
+    <div class="section-div">基本情報</div>
+    <div class="q-block">
+      <div class="q-row">
+        <div class="q-num">Q1</div>
+        <div class="q-label">お名前</div>
+      </div>
+      <div class="q-answer" id="d-name2"></div>
+    </div>
+
+    <div class="section-div">受講のきっかけ</div>
+    <div class="q-block">
+      <div class="q-row">
+        <div class="q-num">Q2</div>
+        <div class="q-label">『脱毒親プログラム【Dトレ】』を受けようと思われたきっかけは何でしょうか。</div>
+      </div>
+      <div class="q-answer" id="d-q1"></div>
+    </div>
+    <div class="q-block">
+      <div class="q-row">
+        <div class="q-num">Q3</div>
+        <div class="q-label">相談前にどのようなことでお悩みでしたか？</div>
+      </div>
+      <div class="q-answer" id="d-q2"></div>
+    </div>
+
+    <div class="section-div">受講後の変化</div>
+    <div class="q-block">
+      <div class="q-row">
+        <div class="q-num">Q4</div>
+        <div class="q-label">カウンセリングを受けて、何か「変わったこと」「気づいたこと」「驚いたこと」「役立ったこと」はございますか。</div>
+      </div>
+      <div class="q-answer" id="d-q3"></div>
+    </div>
+    <div class="q-block">
+      <div class="q-row">
+        <div class="q-num">Q5</div>
+        <div class="q-label">カウンセラーはどんな人で、どんな雰囲気でカウンセリングが進みましたか？</div>
+      </div>
+      <div class="q-answer" id="d-q4"></div>
+    </div>
+    <div class="q-block">
+      <div class="q-row">
+        <div class="q-num">Q6</div>
+        <div class="q-label">他のカウンセリングやサービスと最も違う点をお聞かせください。</div>
+      </div>
+      <div class="q-answer" id="d-q5"></div>
+    </div>
+    <div class="q-block">
+      <div class="q-row">
+        <div class="q-num">Q7</div>
+        <div class="q-label">このプログラムは、どんな人におススメだと思いますか？</div>
+      </div>
+      <div class="q-answer" id="d-q6"></div>
+    </div>
+
+    <div class="section-div">回答の活用について</div>
+    <div class="q-block">
+      <div class="q-row">
+        <div class="q-num">Q8</div>
+        <div class="q-label">回答の活用範囲</div>
+      </div>
+      <div id="d-q7-wrap"></div>
+    </div>
+
+  </div><!-- /detail-view -->
+
+</div>
+</div>
+
+<script>
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbyV9oxrsVZDBOuiFJ7BvKpqiDeRDubXX73bDb-GDXT9aSQPIGo1trfzBYo8_F8E0zCz/exec';
+
+let allData = [];
+let sortOrder = 'desc';
+
+async function loadList() {
+  try {
+    const res = await fetch(GAS_URL + '?action=list');
+    const json = await res.json();
+    if (json.result === 'success') {
+      allData = json.data;
+      renderList();
+    }
+  } catch(e) {
+    document.getElementById('list-body').innerHTML = '<div class="loading">読み込みに失敗しました。</div>';
+  }
+}
+
+function setSort(order) {
+  sortOrder = order;
+  document.getElementById('btn-desc').classList.toggle('active', order === 'desc');
+  document.getElementById('btn-asc').classList.toggle('active', order === 'asc');
+  renderList();
+}
+
+function renderList() {
+  const data = sortOrder === 'desc' ? [...allData].reverse() : [...allData];
+  if (data.length === 0) {
+    document.getElementById('list-body').innerHTML = '<div class="loading">まだ回答がありません。</div>';
+    return;
+  }
+  let html = `<div class="list-count">${data.length} 件の回答</div>`;
+  data.forEach((item, i) => {
+    html += `<div class="list-item" onclick="loadDetail(${item.index})">
+      <div class="list-num">${i + 1}</div>
+      <div class="list-name">${item.name || '（名前なし）'}</div>
+      <div class="list-date">${item.date}</div>
+      <div class="list-arrow">›</div>
+    </div>`;
+  });
+  document.getElementById('list-body').innerHTML = html;
+}
+
+async function loadDetail(index) {
+  document.getElementById('list-view').style.display = 'none';
+  document.getElementById('detail-view').style.display = 'block';
+
+  // 一旦空に
+  ['d-name','d-date','d-name2','d-q1','d-q2','d-q3','d-q4','d-q5','d-q6'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = '読み込み中...';
+  });
+
+  try {
+    const res = await fetch(GAS_URL + '?action=detail&index=' + index);
+    const json = await res.json();
+    if (json.result === 'success') {
+      const d = json.data;
+      document.getElementById('d-name').textContent = d.name || '（名前なし）';
+      document.getElementById('d-date').textContent = d.date;
+      document.getElementById('d-name2').textContent = d.name || '（未記入）';
+      setAnswer('d-q1', d.q1);
+      setAnswer('d-q2', d.q2);
+      setAnswer('d-q3', d.q3);
+      setAnswer('d-q4', d.q4);
+      setAnswer('d-q5', d.q5);
+      setAnswer('d-q6', d.q6);
+
+      // Q8 badge
+      let badgeClass = 'usage-no', badgeText = d.q7 || '（未選択）';
+      if (d.q7 === 'YES') { badgeClass = 'usage-yes'; badgeText = 'YES — すべての用途での使用を承諾'; }
+      else if (d.q7 === '事例検討のみOK') { badgeClass = 'usage-partial'; badgeText = '事例検討・研究会のみ承諾'; }
+      else if (d.q7 === 'NO') { badgeClass = 'usage-no'; badgeText = 'NO — 使用しないでください'; }
+      let q7html = `<div class="usage-badge ${badgeClass}">${badgeText}</div>`;
+      if (d.q7cond) q7html += `<div class="q-answer" style="margin-top:8px">${d.q7cond}</div>`;
+      document.getElementById('d-q7-wrap').innerHTML = q7html;
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  } catch(e) {
+    document.getElementById('d-q1').textContent = '読み込みに失敗しました。';
+  }
+}
+
+function setAnswer(id, text) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (text) {
+    el.textContent = text;
+    el.classList.remove('empty');
+  } else {
+    el.textContent = '（未記入）';
+    el.classList.add('empty');
+  }
+}
+
+function showList() {
+  document.getElementById('detail-view').style.display = 'none';
+  document.getElementById('list-view').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+loadList();
+</script>
+
+</body>
+</html>
