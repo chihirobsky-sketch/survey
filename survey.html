@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>受講後アンケート | 脱毒親Dトレ</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'ヒラギノ丸ゴ ProN', sans-serif;
+  min-height: 100vh;
+  padding: 40px 16px 80px;
+  background: url('background.png') center center / cover fixed;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.28);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.paper {
+  background: rgba(255,255,255,0.90);
+  border: 2px solid #c8e8e4;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 32px rgba(65,193,174,0.12);
+}
+
+/* Header — centered, no icon */
+.header {
+  background: linear-gradient(135deg, rgba(65,193,174,0.13) 0%, rgba(241,146,174,0.08) 100%);
+  border-bottom: 2px solid #c8e8e4;
+  padding: 36px 40px 28px;
+  text-align: center;
+}
+
+.header-title {
+  font-family: 'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', 'ヒラギノ明朝 Pro', serif;
+  font-size: clamp(36px, 7vw, 54px);
+  font-weight: 600;
+  color: #2a9e8d;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.header-sub {
+  font-size: 13px;
+  color: #555;
+  line-height: 2;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.privacy-bar {
+  background: rgba(65,193,174,0.07);
+  border-bottom: 1px solid #d4eeeb;
+  padding: 10px 40px;
+  font-size: 11.5px;
+  color: #666;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.section-div {
+  background: linear-gradient(90deg, rgba(65,193,174,0.14) 0%, rgba(241,146,174,0.08) 100%);
+  border-top: 1px solid #d4eeeb;
+  border-bottom: 1px solid #d4eeeb;
+  padding: 8px 40px;
+  font-family: 'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2a9e8d;
+  letter-spacing: 0.14em;
+}
+
+.q-block {
+  border-bottom: 1px solid #e8f0ef;
+  padding: 22px 40px;
+}
+.q-block:last-child { border-bottom: none; }
+
+.q-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.q-num {
+  font-size: 13px;
+  font-weight: 600;
+  color: #41C1AE;
+  flex-shrink: 0;
+  min-width: 30px;
+}
+
+.q-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+  line-height: 1.7;
+  flex: 1;
+}
+
+.req {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  color: #F192AE;
+  border: 1px solid #F192AE;
+  border-radius: 99px;
+  padding: 1px 8px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.opt {
+  display: inline-block;
+  font-size: 10px;
+  color: #aaa;
+  border: 1px solid #ddd;
+  border-radius: 99px;
+  padding: 1px 8px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.q-hint {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 10px;
+  line-height: 1.7;
+  padding-left: 40px;
+}
+
+.input-wrap { padding-left: 40px; }
+
+textarea, input[type=text] {
+  width: 100%;
+  border: 1px solid #b8e0da;
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', sans-serif;
+  color: #1a1a1a;
+  background: rgba(249,254,254,0.92);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  line-height: 1.8;
+}
+textarea { resize: vertical; min-height: 100px; }
+textarea:focus, input[type=text]:focus {
+  border-color: #41C1AE;
+  box-shadow: 0 0 0 3px rgba(65,193,174,0.13);
+  background: #fff;
+}
+
+.char-count {
+  text-align: right;
+  font-size: 11px;
+  color: #bbb;
+  margin-top: 4px;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 40px;
+  margin-top: 4px;
+}
+
+.radio-opt {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 16px;
+  border: 1px solid #cce8e4;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: rgba(249,254,254,0.88);
+}
+.radio-opt:hover { border-color: #41C1AE; background: rgba(65,193,174,0.07); }
+.radio-opt.selected { border-color: #41C1AE; background: rgba(65,193,174,0.10); }
+
+.radio-circle {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  flex-shrink: 0;
+  margin-top: 2px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+}
+.radio-opt.selected .radio-circle { border-color: #41C1AE; background: #41C1AE; }
+.radio-dot { width: 6px; height: 6px; border-radius: 50%; background: white; display: none; }
+.radio-opt.selected .radio-dot { display: block; }
+.radio-text { font-size: 14px; color: #1a1a1a; line-height: 1.6; }
+.radio-sub { font-size: 12px; color: #999; margin-top: 2px; }
+
+.submit-area {
+  padding: 32px 40px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(65,193,174,0.07) 0%, rgba(241,146,174,0.04) 100%);
+  border-top: 2px solid #c8e8e4;
+}
+
+.btn-submit {
+  display: inline-block;
+  padding: 14px 64px;
+  background: #41C1AE;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', sans-serif;
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(65,193,174,0.30);
+}
+.btn-submit:hover { background: #2eaa97; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(65,193,174,0.40); }
+.btn-submit:active { transform: translateY(0); }
+.btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.sending-msg { margin-top: 14px; font-size: 13px; color: #999; display: none; }
+
+.hidden { display: none; }
+
+.success-page {
+  display: none;
+  background: rgba(255,255,255,0.92);
+  border: 2px solid #c8e8e4;
+  border-radius: 4px;
+  text-align: center;
+  padding: 80px 40px;
+  box-shadow: 0 4px 32px rgba(65,193,174,0.12);
+}
+
+.success-mark {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  border: 2px solid #41C1AE;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px;
+}
+.success-mark svg {
+  width: 30px; height: 30px;
+  stroke: #41C1AE; fill: none;
+  stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+}
+
+.success-title {
+  font-family: 'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', serif;
+  font-size: 28px; font-weight: 600;
+  color: #2a9e8d;
+  margin-bottom: 16px;
+  letter-spacing: 0.06em;
+}
+
+.success-msg { font-size: 14px; color: #555; line-height: 2.2; }
+
+@media (max-width: 600px) {
+  body { padding: 16px 12px 60px; }
+  .header { padding: 28px 20px 22px; }
+  .privacy-bar, .section-div { padding-left: 20px; padding-right: 20px; }
+  .q-block { padding: 18px 20px; }
+  .q-hint, .input-wrap, .radio-group { padding-left: 0; }
+  .submit-area { padding: 24px 20px; }
+  .success-page { padding: 60px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page" id="form-page">
+<div class="paper">
+
+  <div class="header">
+    <div class="header-title">受講後アンケート</div>
+    <div class="header-sub">
+      この度は【脱毒親Dトレ】をご受講くださいまして、誠にありがとうございました。<br>
+      受講生の方々のお声を反映させて、今後の講座の改良に活かしたいと思い、<br>
+      アンケートを実施しております。ご協力いただけますと幸いです。
+    </div>
+  </div>
+
+  <div class="privacy-bar">
+    いただいた回答および個人情報につきましては、当方のプライバシーポリシーに従い、厳重に保管いたします。ご多忙と存じますが、なにとぞご協力のほど、よろしくお願い申し上げます。
+  </div>
+
+  <div class="section-div">基本情報</div>
+
+  <div class="q-block">
+    <div class="q-row">
+      <div class="q-num">Q1</div>
+      <div class="q-label">お名前<span class="req">必須</span></div>
+    </div>
+    <div class="input-wrap">
+      <input type="text" id="qname" placeholder="例：A.T.さん　／　30代女性　など">
+    </div>
+  </div>
+
+  <div class="section-div">受講のきっかけ</div>
+
+  <div class="q-block">
+    <div class="q-row">
+      <div class="q-num">Q2</div>
+      <div class="q-label">このカウンセリングを受けようと思われた動機は何でしょうか。<span class="req">必須</span></div>
+    </div>
+    <div class="q-hint">理由を詳しくお聞かせください。</div>
+    <div class="input-wrap">
+      <textarea id="q1" rows="5" placeholder="例：親との関係に長年悩んでいて、自分の力だけでは変われないと感じていたため…" oninput="cnt(this,'c1',500)"></textarea>
+      <div class="char-count"><span id="c1">0</span> / 500</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-row">
+      <div class="q-num">Q3</div>
+      <div class="q-label">相談前にどのようなことでお悩みでしたか？<span class="req">必須</span></div>
+    </div>
+    <div class="input-wrap">
+      <textarea id="q2" rows="5" placeholder="受講前の状況や、抱えていたお悩みをお聞かせください…" oninput="cnt(this,'c2',500)"></textarea>
+      <div class="char-count"><span id="c2">0</span> / 500</div>
+    </div>
+  </div>
+
+  <div class="section-div">受講後の変化</div>
+
+  <div class="q-block">
+    <div class="q-row">
+      <div class="q-num">Q4</div>
+      <div class="q-label">セッションを受けて、変わったこと・気づいたこと・驚いたこと・役立ったことはございますか？<span class="req">必須</span></div>
+    </div>
+    <div class="q-hint">どんな些細なことでも良いので、お聞かせください。</div>
+    <div class="input-wrap">
+      <textarea id="q3" rows="6" placeholder="例：以前は親の言動に振り回されていたが、自分の感情を切り離して考えられるようになった…" oninput="cnt(this,'c3',600)"></textarea>
+      <div class="char-count"><span id="c3">0</span> / 600</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-row">
+      <div class="q-num">Q5</div>
+      <div class="q-label">カウンセラーはどんな人で、どんな雰囲気でセッションが進みましたか？<span class="opt">任意</span></div>
+    </div>
+    <div class="input-wrap">
+      <textarea id="q4" rows="4" placeholder="例：とても話しやすく、否定せずに聞いてくださった…" oninput="cnt(this,'c4',400)"></textarea>
+      <div class="char-count"><span id="c4">0</span> / 400</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-row">
+      <div class="q-num">Q6</div>
+      <div class="q-label">他のカウンセリングやサービスと最も違う点をお聞かせください。<span class="opt">任意</span></div>
+    </div>
+    <div class="input-wrap">
+      <textarea id="q5" rows="4" placeholder="例：他では「親を許しましょう」と言われたが、ここでは自分の気持ちを優先してもらえた…" oninput="cnt(this,'c5',400)"></textarea>
+      <div class="char-count"><span id="c5">0</span> / 400</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-row">
+      <div class="q-num">Q7</div>
+      <div class="q-label">このカウンセリングを、どんな人にオススメだと思いますか？<span class="opt">任意</span></div>
+    </div>
+    <div class="input-wrap">
+      <textarea id="q6" rows="4" placeholder="例：親との関係に苦しんでいて、自分を責めてしまいがちな方に…" oninput="cnt(this,'c6',400)"></textarea>
+      <div class="char-count"><span id="c6">0</span> / 400</div>
+    </div>
+  </div>
+
+  <div class="section-div">掲載について</div>
+
+  <div class="q-block">
+    <div class="q-row">
+      <div class="q-num">Q8</div>
+      <div class="q-label">いただいた回答を、サービス紹介等に掲載してもよいでしょうか？<span class="req">必須</span></div>
+    </div>
+    <div class="radio-group" id="rg7">
+      <div class="radio-opt" onclick="sel(this,'YES')">
+        <div class="radio-circle"><div class="radio-dot"></div></div>
+        <div><div class="radio-text">YES — 掲載してOKです</div></div>
+      </div>
+      <div class="radio-opt" onclick="sel(this,'条件付きOK')">
+        <div class="radio-circle"><div class="radio-dot"></div></div>
+        <div>
+          <div class="radio-text">条件付きでOK</div>
+          <div class="radio-sub">（例：イニシャルのみ、など）</div>
+        </div>
+      </div>
+      <div class="radio-opt" onclick="sel(this,'NO')">
+        <div class="radio-circle"><div class="radio-dot"></div></div>
+        <div><div class="radio-text">NO — 掲載しないでください</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block hidden" id="cond-block">
+    <div class="q-row">
+      <div class="q-num">↳</div>
+      <div class="q-label">掲載条件・ご要望をお書きください<span class="req">必須</span></div>
+    </div>
+    <div class="input-wrap">
+      <input type="text" id="q7cond" placeholder="例：イニシャルのみ（A.T.）でお願いします">
+    </div>
+  </div>
+
+  <div class="submit-area">
+    <button class="btn-submit" id="submitBtn" onclick="submitForm()">アンケートを送信する</button>
+    <div class="sending-msg" id="sending">送信中です。しばらくお待ちください…</div>
+  </div>
+
+</div>
+</div>
+
+<div class="success-page" id="done-page">
+  <div class="success-mark">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <div class="success-title">ありがとうございました</div>
+  <p class="success-msg">
+    いただいた貴重なお声は、講座の改良に活かしてまいります。<br>
+    長い期間のご受講、本当にお疲れ様でした。<br><br>
+    どうぞお体に気をつけてお過ごしください。
+  </p>
+</div>
+
+<script>
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbwpo3oMg-g-bB9fCaQaYfK8Ca5mc0WfpbweoeYVoRXe-WV0tZVP79ShGKaOhm2xFoqs/exec';
+let pubVal = '';
+
+function cnt(el, id, max) {
+  if (el.value.length > max) el.value = el.value.slice(0, max);
+  document.getElementById(id).textContent = el.value.length;
+}
+
+function sel(el, val) {
+  document.getElementById('rg7').querySelectorAll('.radio-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  pubVal = val;
+  document.getElementById('cond-block').classList.toggle('hidden', val !== '条件付きOK');
+}
+
+function submitForm() {
+  const name = document.getElementById('qname').value.trim();
+  const q1 = document.getElementById('q1').value.trim();
+  const q2 = document.getElementById('q2').value.trim();
+  const q3 = document.getElementById('q3').value.trim();
+  if (!name) { alert('お名前は必須項目です。ご記入をお願いします。'); return; }
+  if (!q1 || !q2 || !q3) { alert('Q2〜Q4は必須項目です。ご記入をお願いします。'); return; }
+  if (!pubVal) { alert('Q8（掲載可否）をお選びください。'); return; }
+  if (pubVal === '条件付きOK' && !document.getElementById('q7cond').value.trim()) {
+    alert('掲載条件をご記入ください。'); return;
+  }
+
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('sending').style.display = 'block';
+
+  const params = new URLSearchParams({
+    name, q1, q2, q3,
+    q4: document.getElementById('q4').value.trim(),
+    q5: document.getElementById('q5').value.trim(),
+    q6: document.getElementById('q6').value.trim(),
+    q7: pubVal,
+    q7cond: document.getElementById('q7cond').value.trim()
+  });
+
+  const img = new Image();
+  img.onload = img.onerror = function () {
+    document.getElementById('form-page').style.display = 'none';
+    document.getElementById('done-page').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  img.src = GAS_URL + '?' + params.toString();
+}
+</script>
+</body>
+</html>
